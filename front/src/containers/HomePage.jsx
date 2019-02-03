@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import MainCarousel from './MainCarousel';
-import BestContent from '../components/BestContent';
 import Footer from '../components/Footer';
 import { fetchMovies, fetchSeries } from '../actions/fetch';
+import BestMovies from '../components/BestMovies';
+import BestSeries from '../components/BestSeries';
 
 class HomePage extends Component {
   constructor(props) {
@@ -20,14 +21,14 @@ class HomePage extends Component {
 
   render() {
     const { movies, series } = this.props;
-    return ( 
+    return (
       <div className="HomePage">
         <MainCarousel />
-        <BestContent content={movies}/>
-        <BestContent content={series}/>
+        <BestMovies movies={movies} />
+        <BestSeries series={series} />
         <Footer />
       </div>
-     );
+    );
   }
 }
 
@@ -37,9 +38,8 @@ const mstp = state => ({
 });
 
 const mdtp = dispatch => bindActionCreators({
-    fetchMoviesAction: fetchMovies,
-    fetchSeriesAction: fetchSeries,
-  }, dispatch);
+  fetchMoviesAction: fetchMovies,
+  fetchSeriesAction: fetchSeries,
+}, dispatch);
 
- 
 export default connect(mstp, mdtp)(HomePage);

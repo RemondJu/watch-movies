@@ -4,7 +4,7 @@ import {
   CarouselItem,
   CarouselControl,
   CarouselIndicators,
-  CarouselCaption
+  CarouselCaption,
 } from 'reactstrap';
 import './MainCarousel.css';
 import { bindActionCreators } from 'redux';
@@ -14,10 +14,9 @@ import { getBigPosters } from '../actions/fetch';
 class MainCarousel extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       activeIndex: 0,
-
-     };
+    };
     this.next = this.next.bind(this);
     this.previous = this.previous.bind(this);
     this.goToIndex = this.goToIndex.bind(this);
@@ -39,14 +38,16 @@ class MainCarousel extends Component {
   }
 
   next() {
+    const { activeIndex } = this.state;
     if (this.animating) return;
-    const nextIndex = this.state.activeIndex === 2 ? 0 : this.state.activeIndex + 1;
+    const nextIndex = activeIndex === 2 ? 0 : activeIndex + 1;
     this.setState({ activeIndex: nextIndex });
   }
 
   previous() {
+    const { activeIndex } = this.state;
     if (this.animating) return;
-    const nextIndex = this.state.activeIndex === 0 ? 2 : this.state.activeIndex - 1;
+    const nextIndex = activeIndex === 0 ? 2 : activeIndex - 1;
     this.setState({ activeIndex: nextIndex });
   }
 
@@ -62,18 +63,18 @@ class MainCarousel extends Component {
       {
         src: bigPosters[0].big_poster,
         altText: bigPosters[0].name,
-        caption: bigPosters[0].name
+        caption: bigPosters[0].name,
       },
       {
         src: bigPosters[1].big_poster,
         altText: bigPosters[1].name,
-        caption: bigPosters[1].name
+        caption: bigPosters[1].name,
       },
       {
         src: bigPosters[2].big_poster,
         altText: bigPosters[2].name,
-        caption: bigPosters[2].name
-      }
+        caption: bigPosters[2].name,
+      },
     ] : [];
 
     const slides = items.map((item, index) => {
@@ -83,7 +84,7 @@ class MainCarousel extends Component {
           onExited={this.onExited}
           key={index}
         >
-          <img width="100%" height="600px" src={item.src} alt={item.altText + ' poster'} />
+          <img width="100%" height="600px" src={item.src} alt={`${item.altText} poster`} />
           <CarouselCaption captionText="" captionHeader={item.caption} />
         </CarouselItem>
       );
@@ -96,7 +97,11 @@ class MainCarousel extends Component {
         previous={this.previous}
         className="Carousel"
       >
-        <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
+        <CarouselIndicators
+          items={items}
+          activeIndex={activeIndex}
+          onClickHandler={this.goToIndex}
+        />
         {slides}
         <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
         <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
@@ -107,11 +112,11 @@ class MainCarousel extends Component {
 
 const mstp = state => ({
   bigPosters: state.bigPosters,
-})
+});
 
 const mdtp = dispatch => bindActionCreators({
   getBigPostersAction: getBigPosters,
-}, dispatch)
+}, dispatch);
 
 
 export default connect(mstp, mdtp)(MainCarousel);

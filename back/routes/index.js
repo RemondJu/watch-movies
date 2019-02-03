@@ -108,6 +108,7 @@ router.delete('/movie/:id', (req, res) => {
 router.put('/movie/:id', (req, res) => {
   connection.query('UPDATE movies SET ? WHERE id = ?', [req.body, req.params.id], (err) => {
     if (err) {
+      console.log(req.body);
       res.sendStatus(500);
     } else {
       res.sendStatus(204);

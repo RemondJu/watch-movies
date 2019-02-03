@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import MovieCard from '../components/MovieCard';
 import './Movies.css';
-import { bindActionCreators } from 'redux';
 import { fetchMovies } from '../actions/fetch';
 
 class Movies extends Component {
@@ -12,32 +12,34 @@ class Movies extends Component {
   }
 
   componentDidMount() {
-    const { fetchMoviesAction } = this.props;
-    fetchMoviesAction();
+    const { fetchMoviesAction, movies } = this.props;
+    if (!movies[0]) {
+      fetchMoviesAction();
+    }
   }
 
-  render() { 
+  render() {
     const { movies } = this.props;
     return (
       <div className="Movies">
         <h2>Movies</h2>
         <div className="moviesDisplay">
           {movies.map(movie => (
-          <MovieCard 
-            key={movie.id}
-            id={movie.id}
-            name={movie.name}
-            date={movie.release_date}
-            rating={movie.rating}
-            category={movie.category}
-            director={movie.director}
-            poster={movie.poster}
-            seasons={movie.seasons}
-          />
+            <MovieCard
+              key={movie.id}
+              id={movie.id}
+              name={movie.name}
+              date={movie.release_date}
+              rating={movie.rating}
+              category={movie.category}
+              director={movie.director}
+              poster={movie.poster}
+              seasons={movie.seasons}
+            />
           ))}
         </div>
       </div>
-     );
+    );
   }
 }
 
@@ -47,6 +49,6 @@ const mstp = state => ({
 
 const mdtp = dispatch => bindActionCreators({
   fetchMoviesAction: fetchMovies,
-}, dispatch)
+}, dispatch);
 
 export default connect(mstp, mdtp)(Movies);

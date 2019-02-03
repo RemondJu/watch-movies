@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import {
+  Col,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+} from 'reactstrap';
+import { withRouter } from 'react-router-dom';
 
 class AddMovieForm extends Component {
   constructor(props) {
@@ -10,8 +18,8 @@ class AddMovieForm extends Component {
       category: '',
       synopsis: '',
       poster: '',
-      big_poster: '',
-      release_date: '',
+      bigPoster: '',
+      realeaseDate: '',
       rating: 0,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,11 +29,12 @@ class AddMovieForm extends Component {
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value,
-    })
+    });
   }
-  
+
   handleSubmit(e) {
     e.preventDefault();
+    const { history } = this.props;
     const config = {
       method: 'POST',
       headers: {
@@ -41,10 +50,11 @@ class AddMovieForm extends Component {
         category: '',
         synopsis: '',
         poster: '',
-        big_poster: '',
-        release_date: '',
+        bigPoster: '',
+        realeaseDate: '',
         rating: 0,
-      }));
+      }))
+      .then(history.push('/movies'));
   }
 
   render() {
@@ -54,8 +64,8 @@ class AddMovieForm extends Component {
       category,
       synopsis,
       poster,
-      big_poster,
-      release_date
+      bigPoster,
+      realeaseDate,
     } = this.state;
     return (
       <Form className="AddMovieForm" onSubmit={this.handleSubmit}>
@@ -72,16 +82,16 @@ class AddMovieForm extends Component {
           </Col>
         </FormGroup>
         <FormGroup row>
-          <Label sm={2} for="release_date">Release date</Label>
+          <Label sm={2} for="realeaseDate">Release date</Label>
           <Col sm={10}>
             <Input
               type="date"
-              name="release_date"
-              id="release_date"
-              value={release_date}
-              onChange={this.handleChange} 
+              name="realeaseDate"
+              id="realeaseDate"
+              value={realeaseDate}
+              onChange={this.handleChange}
             />
-          </Col>          
+          </Col>
         </FormGroup>
         <FormGroup row>
           <Label sm={2} for="exampleNumber">Rating</Label>
@@ -95,12 +105,12 @@ class AddMovieForm extends Component {
               min="0"
               max="10"
             />
-          </Col>          
+          </Col>
         </FormGroup>
         <FormGroup row>
           <Label for="exampleSelect" sm={2}>Category</Label>
           <Col sm={10}>
-            <Input type="select" name="category" id="exampleSelect" value={category} onChange={this.handleChange} >
+            <Input type="select" name="category" id="exampleSelect" value={category} onChange={this.handleChange}>
               <option>Adventure</option>
               <option>Action</option>
               <option>Comedy</option>
@@ -125,9 +135,9 @@ class AddMovieForm extends Component {
           </Col>
         </FormGroup>
         <FormGroup row>
-          <Label for="big_poster" sm={2}>Big Poster</Label>
+          <Label for="bigPoster" sm={2}>Big Poster</Label>
           <Col sm={10}>
-            <Input type="text" name="big_poster" id="big_poster" value={big_poster} placeholder="url" onChange={this.handleChange} />
+            <Input type="text" name="bigPoster" id="bigPoster" value={bigPoster} placeholder="url" onChange={this.handleChange} />
           </Col>
         </FormGroup>
         <FormGroup check row>
@@ -140,4 +150,4 @@ class AddMovieForm extends Component {
   }
 }
 
-export default AddMovieForm;
+export default withRouter(AddMovieForm);

@@ -7,32 +7,32 @@ import ActorCard from '../components/ActorCard';
 class Actors extends Component {
   constructor(props) {
     super(props);
-    this.state = {  };
-  };
+    this.state = {};
+  }
 
   componentDidMount() {
-    const { fetchActorsAction } = this.props; 
+    const { fetchActorsAction } = this.props;
     fetchActorsAction('http://localhost:4100/movies-api/actors');
   }
 
-  render() { 
+  render() {
     const { fetchedActors } = this.props;
-    return ( 
+    return (
       <div className="Actors">
         <h2>Actors</h2>
         <div className="actorsDisplay">
-        {fetchedActors[0] ? fetchedActors.map(actor => (
-          <ActorCard
-            key={actor.id}
-            id={actor.id}
-            name={actor.name}
-            lastname={actor.lastname}
-            age={actor.age}
-          />
-        )) : ''}
+          {fetchedActors[0] ? fetchedActors.map(actor => (
+            <ActorCard
+              key={actor.id}
+              id={actor.id}
+              name={actor.name}
+              lastname={actor.lastname}
+              age={actor.age}
+            />
+          )) : ''}
         </div>
       </div>
-     );
+    );
   }
 }
 
@@ -43,5 +43,5 @@ const mstp = state => ({
 const mdtp = dispatch => bindActionCreators({
   fetchActorsAction: fetchActors,
 }, dispatch);
- 
+
 export default connect(mstp, mdtp)(Actors);

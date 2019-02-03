@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import {
+  Col,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+} from 'reactstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
@@ -14,8 +21,8 @@ class ModifyMovieForm extends Component {
       category: '',
       synopsis: '',
       poster: '',
-      big_poster: '',
-      release_date: '',
+      bigPoster: '',
+      releaseDate: '',
       rating: 0,
       refreshState: true,
     };
@@ -25,7 +32,8 @@ class ModifyMovieForm extends Component {
   }
 
   componentDidUpdate() {
-    if(this.state.refreshState) {
+    const { refreshState } = this.state;
+    if (refreshState) {
       this.addMovieToState();
     }
   }
@@ -38,11 +46,11 @@ class ModifyMovieForm extends Component {
       category: movie.category,
       synopsis: movie.synopsis,
       poster: movie.poster,
-      big_poster: movie.big_poster,
-      release_date: movie.release_date,
+      bigPoster: movie.big_poster,
+      releaseDate: movie.release_date,
       rating: movie.rating,
       refreshState: false,
-    })
+    });
   }
 
   handleChange(e) {
@@ -50,20 +58,30 @@ class ModifyMovieForm extends Component {
       [e.target.name]: e.target.value,
     });
   }
-  
+
   handleSubmit(e) {
     e.preventDefault();
     const { history, match, fetchMoviesAction } = this.props;
+    const {
+      name,
+      director,
+      category,
+      synopsis,
+      poster,
+      bigPoster,
+      releaseDate,
+      rating,
+    } = this.state;
     const data = {
-      name: this.state.name,
-      director: this.state.director,
-      category: this.state.category,
-      synopsis: this.state.synopsis,
-      poster: this.state.poster,
-      big_poster: this.state.big_poster,
-      release_date: this.state.release_date.slice(0,10),
-      rating: this.state.rating
-    }
+      name,
+      director,
+      category,
+      synopsis,
+      poster,
+      big_poster: bigPoster,
+      release_date: releaseDate,
+      rating,
+    };
     const config = {
       method: 'PUT',
       headers: {
@@ -78,8 +96,8 @@ class ModifyMovieForm extends Component {
         category: '',
         synopsis: '',
         poster: '',
-        big_poster: '',
-        release_date: '',
+        bigPoster: '',
+        releaseDate: '',
         rating: 0,
       }))
       .then(fetchMoviesAction())
@@ -93,9 +111,9 @@ class ModifyMovieForm extends Component {
       category,
       synopsis,
       poster,
-      big_poster,
-      release_date,
-      rating
+      bigPoster,
+      releaseDate,
+      rating,
     } = this.state;
     return (
       <Form className="ModifyMovieForm" onSubmit={this.handleSubmit}>
@@ -112,16 +130,16 @@ class ModifyMovieForm extends Component {
           </Col>
         </FormGroup>
         <FormGroup row>
-          <Label sm={2} for="release_date">Release date</Label>
+          <Label sm={2} for="releaseDate">Release date</Label>
           <Col sm={10}>
             <Input
               type="date"
-              name="release_date"
-              id="release_date"
-              value={release_date.slice(0, 10)}
-              onChange={this.handleChange} 
+              name="releaseDate"
+              id="releaseDate"
+              value={releaseDate}
+              onChange={this.handleChange}
             />
-          </Col>          
+          </Col>
         </FormGroup>
         <FormGroup row>
           <Label sm={2} for="exampleNumber">Rating</Label>
@@ -136,12 +154,12 @@ class ModifyMovieForm extends Component {
               max="10"
               value={rating}
             />
-          </Col>          
+          </Col>
         </FormGroup>
         <FormGroup row>
           <Label for="exampleSelect" sm={2}>Category</Label>
           <Col sm={10}>
-            <Input type="select" name="category" id="exampleSelect" value={category} onChange={this.handleChange} >
+            <Input type="select" name="category" id="exampleSelect" value={category} onChange={this.handleChange}>
               <option>Adventure</option>
               <option>Action</option>
               <option>Comedy</option>
@@ -166,9 +184,9 @@ class ModifyMovieForm extends Component {
           </Col>
         </FormGroup>
         <FormGroup row>
-          <Label for="big_poster" sm={2}>Big Poster</Label>
+          <Label for="bigPoster" sm={2}>Big Poster</Label>
           <Col sm={10}>
-            <Input type="text" name="big_poster" id="big_poster" value={big_poster} placeholder="url" onChange={this.handleChange} />
+            <Input type="text" name="bigPoster" id="bigPoster" value={bigPoster} placeholder="url" onChange={this.handleChange} />
           </Col>
         </FormGroup>
         <FormGroup check row>

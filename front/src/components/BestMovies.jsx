@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import MovieCard from './MovieCard';
 import './BestContent.css';
 
@@ -13,6 +14,7 @@ class BestMovies extends Component {
     return (
       <div className="BestMovies">
         <h1>Movies</h1>
+        <NavLink to="/movies"><p>See all</p></NavLink>
         <div className="moviesDisplay">
           {movies[0] ? movies.slice(0, 4).map(movie => (
             <MovieCard

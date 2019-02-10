@@ -9,7 +9,7 @@ import {
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 
-class AddMovieForm extends Component {
+class AddSeriesForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,9 +18,9 @@ class AddMovieForm extends Component {
       category: '',
       synopsis: '',
       poster: '',
-      bigPoster: '',
       releaseDate: '',
       rating: 0,
+      seasons: 0,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -41,9 +41,9 @@ class AddMovieForm extends Component {
       director,
       synopsis,
       poster,
-      bigPoster,
       releaseDate,
       rating,
+      seasons,
     } = this.state;
     const data = {
       name,
@@ -51,9 +51,9 @@ class AddMovieForm extends Component {
       category,
       synopsis,
       poster,
-      big_poster: bigPoster,
       release_date: releaseDate,
       rating,
+      seasons,
     };
     const config = {
       method: 'POST',
@@ -62,7 +62,7 @@ class AddMovieForm extends Component {
       },
       body: JSON.stringify(data),
     };
-    fetch('http://localhost:4100/movies-api/movie', config)
+    fetch('http://localhost:4100/movies-api/serie', config)
       .then(res => res.json())
       .then(this.setState({
         name: '',
@@ -70,11 +70,11 @@ class AddMovieForm extends Component {
         category: '',
         synopsis: '',
         poster: '',
-        bigPoster: '',
         releaseDate: '',
         rating: 0,
+        seasons: 0,
       }))
-      .then(history.push('/movies'));
+      .then(history.push('/series'));
   }
 
   render() {
@@ -84,22 +84,21 @@ class AddMovieForm extends Component {
       category,
       synopsis,
       poster,
-      bigPoster,
       releaseDate,
     } = this.state;
     return (
-      <Form className="AddMovieForm" onSubmit={this.handleSubmit}>
-        <h2>Add a movie</h2>
+      <Form className="AddSeriesForm" onSubmit={this.handleSubmit}>
+        <h2>Add a series</h2>
         <FormGroup row>
           <Label for="name" sm={2}>Name</Label>
           <Col sm={10}>
-            <Input type="text" name="name" id="name" value={name} placeholder="E.T. ..." onChange={this.handleChange} />
+            <Input type="text" name="name" id="name" value={name} placeholder="Game of thrones" onChange={this.handleChange} />
           </Col>
         </FormGroup>
         <FormGroup row>
           <Label for="director" sm={2}>Director</Label>
           <Col sm={10}>
-            <Input type="text" name="director" id="director" value={director} placeholder="S. Spielberg..." onChange={this.handleChange} />
+            <Input type="text" name="director" id="director" value={director} placeholder="George R. R. Martin" onChange={this.handleChange} />
           </Col>
         </FormGroup>
         <FormGroup row>
@@ -115,7 +114,7 @@ class AddMovieForm extends Component {
           </Col>
         </FormGroup>
         <FormGroup row>
-          <Label sm={2} for="exampleNumber">Rating</Label>
+          <Label sm={2} for="rating">Rating</Label>
           <Col sm={10}>
             <Input
               onChange={this.handleChange}
@@ -125,6 +124,18 @@ class AddMovieForm extends Component {
               placeholder="5"
               min="0"
               max="10"
+            />
+          </Col>
+        </FormGroup>
+        <FormGroup row>
+          <Label sm={2} for="seasons">Number of seasons</Label>
+          <Col sm={10}>
+            <Input
+              onChange={this.handleChange}
+              type="number"
+              name="seasons"
+              id="rating"
+              placeholder="0"
             />
           </Col>
         </FormGroup>
@@ -146,19 +157,13 @@ class AddMovieForm extends Component {
         <FormGroup row>
           <Label for="Synopsis" sm={2}>Synopsis</Label>
           <Col sm={10}>
-            <Input type="textarea" name="synopsis" id="Synopsis" value={synopsis} placeholder="Story of a little alien lost on planet earth and found by a young human boy" onChange={this.handleChange} />
+            <Input type="textarea" name="synopsis" id="Synopsis" value={synopsis} placeholder="You're gonna see a lot of blood!" onChange={this.handleChange} />
           </Col>
         </FormGroup>
         <FormGroup row>
           <Label for="Poster" sm={2}>Poster</Label>
           <Col sm={10}>
-            <Input type="text" name="poster" id="Poster" placeholder="url" value={poster} onChange={this.handleChange} />
-          </Col>
-        </FormGroup>
-        <FormGroup row>
-          <Label for="bigPoster" sm={2}>Big Poster</Label>
-          <Col sm={10}>
-            <Input type="text" name="bigPoster" id="bigPoster" value={bigPoster} placeholder="url" onChange={this.handleChange} />
+            <Input type="text" name="poster" id="Poster" placeholder="Poster url..." value={poster} onChange={this.handleChange} />
           </Col>
         </FormGroup>
         <FormGroup check row>
@@ -171,4 +176,4 @@ class AddMovieForm extends Component {
   }
 }
 
-export default withRouter(AddMovieForm);
+export default withRouter(AddSeriesForm);

@@ -96,6 +96,29 @@ router.post('/movie', (req, res) => {
   });
 });
 
+router.post('/serie', (req, res) => {
+  const formData = req.body;
+  connection.query('INSERT INTO series SET ?', formData, (err, result) => {
+    if (err) {
+      res.sendStatus(500);
+      console.log(err);
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+router.post('/actor', (req, res) => {
+  const formData = req.body;
+  connection.query('INSERT INTO actors SET ?', formData, (err, result) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.json(result);
+    }
+  });
+});
+
 router.delete('/movie/:id', (req, res) => {
   connection.query('DELETE FROM `movies` WHERE `movies`.`id` = ?', req.params.id, (err, result) => {
     if (err) {
@@ -105,6 +128,17 @@ router.delete('/movie/:id', (req, res) => {
     }
   });
 });
+
+router.delete('/serie/:id', (req, res) => {
+  connection.query('DELETE FROM `series` WHERE `series`.`id` = ?', req.params.id, (err, result) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.json(result);
+    }
+  });
+});
+
 
 router.put('/movie/:id', (req, res) => {
   connection.query('UPDATE movies SET ? WHERE id = ?', [req.body, req.params.id], (err) => {

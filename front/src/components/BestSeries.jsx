@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import MovieCard from './MovieCard';
 import './BestContent.css';
+import SerieCard from './SerieCard';
 
 class BestSeries extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class BestSeries extends Component {
         <h1>Series</h1>
         <div className="moviesDisplay">
           {series[0] ? series.map(movie => (
-            <MovieCard
+            <SerieCard
               id={movie.id}
               key={movie.id}
               name={movie.name}

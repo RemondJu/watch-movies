@@ -19,7 +19,7 @@ class AddMovieForm extends Component {
       synopsis: '',
       poster: '',
       bigPoster: '',
-      realeaseDate: '',
+      releaseDate: '',
       rating: 0,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -35,12 +35,32 @@ class AddMovieForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const { history } = this.props;
+    const {
+      name,
+      category,
+      director,
+      synopsis,
+      poster,
+      bigPoster,
+      releaseDate,
+      rating,
+    } = this.state;
+    const data = {
+      name,
+      director,
+      category,
+      synopsis,
+      poster,
+      big_poster: bigPoster,
+      release_date: releaseDate,
+      rating,
+    };
     const config = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(this.state),
+      body: JSON.stringify(data),
     };
     fetch('http://localhost:4100/movies-api/movie', config)
       .then(res => res.json())
@@ -51,7 +71,7 @@ class AddMovieForm extends Component {
         synopsis: '',
         poster: '',
         bigPoster: '',
-        realeaseDate: '',
+        releaseDate: '',
         rating: 0,
       }))
       .then(history.push('/movies'));
@@ -65,7 +85,7 @@ class AddMovieForm extends Component {
       synopsis,
       poster,
       bigPoster,
-      realeaseDate,
+      releaseDate,
     } = this.state;
     return (
       <Form className="AddMovieForm" onSubmit={this.handleSubmit}>
@@ -82,13 +102,13 @@ class AddMovieForm extends Component {
           </Col>
         </FormGroup>
         <FormGroup row>
-          <Label sm={2} for="realeaseDate">Release date</Label>
+          <Label sm={2} for="releaseDate">Release date</Label>
           <Col sm={10}>
             <Input
               type="date"
-              name="realeaseDate"
-              id="realeaseDate"
-              value={realeaseDate}
+              name="releaseDate"
+              id="releaseDate"
+              value={releaseDate}
               onChange={this.handleChange}
             />
           </Col>

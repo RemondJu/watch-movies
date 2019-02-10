@@ -8,6 +8,7 @@ import {
   Button,
 } from 'reactstrap';
 import './MovieCard.css';
+import { withRouter } from 'react-router-dom';
 
 class MovieCard extends Component {
   constructor(props) {
@@ -16,17 +17,21 @@ class MovieCard extends Component {
   }
 
   deleteSerie(id) {
+    const { history } = this.props;
     const config = {
       method: 'DELETE',
     };
-    fetch(`http://localhost:4100/movies-api/serie/${id}`, config);
+    fetch(`http://localhost:4100/movies-api/serie/${id}`, config)
+      .then(history.push('/'));
   }
 
   updateSerie(id) {
+    const { history } = this.props;
     const config = {
       method: 'UPDATE',
     };
-    fetch(`http://localhost:4100/movies-api/serie/${id}`, config);
+    fetch(`http://localhost:4100/movies-api/serie/${id}`, config)
+      .then(history.push('/'));
   }
 
   render() {
@@ -43,7 +48,7 @@ class MovieCard extends Component {
     return (
       <div className="MovieCard">
         <Card>
-          <CardImg top width="100%" height="450px" src={poster} alt="Card image cap" />  
+          <CardImg top width="100%" height="450px" src={poster} alt="Card image cap" />
           <CardBody>
             <CardTitle>{name}</CardTitle>
             <CardSubtitle>{`released : ${date}`}</CardSubtitle>
@@ -60,4 +65,4 @@ class MovieCard extends Component {
   }
 }
 
-export default MovieCard;
+export default withRouter(MovieCard);

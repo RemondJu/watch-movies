@@ -6,7 +6,7 @@ import NavBar from './containers/NavBar';
 import './App.css';
 import Actors from './containers/Actors';
 import AddMovieForm from './components/AddMovieForm';
-import SearchedMovies from './components/SearchedMovies';
+import SearchedContent from './components/SearchedContent';
 import ModifyMovieForm from './containers/ModifyMovieForm';
 import AddSeriesForm from './components/AddSeriesForm';
 import Series from './containers/Series';
@@ -21,7 +21,7 @@ const App = () => (
       <Route path="/series" component={Series} />
       <Route path="/add-movie" component={AddMovieForm} />
       <Route path="/add-serie" component={AddSeriesForm} />
-      <Route path="/searched-movies" component={SearchedMovies} />
+      <Route path="/searched-content" component={SearchedContent} />
       <Route path="/modify-movie/:id" component={ModifyMovieForm} />
     </Switch>
   </div>

@@ -63,10 +63,32 @@ router.get('/series', (req, res) => {
   });
 });
 
-router.get('/search/:name', (req, res) => {
+router.get('/movies/:name', (req, res) => {
   connection.query(`SELECT * FROM movies WHERE name LIKE '%${req.params.name}%'`, (err, result) => {
     if (err) {
+      console.log('Error during movies fetching: ', err);
+      res.sendStatus(500);
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+router.get('/series/:name', (req, res) => {
+  connection.query(`SELECT * FROM series WHERE name LIKE '%${req.params.name}%'`, (err, result) => {
+    if (err) {
       console.log('Error during series fetching: ', err);
+      res.sendStatus(500);
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+router.get('/actors/:name', (req, res) => {
+  connection.query(`SELECT * FROM actors WHERE name LIKE '%${req.params.name}%'`, (err, result) => {
+    if (err) {
+      console.log('Error during actors fetching: ', err);
       res.sendStatus(500);
     } else {
       res.json(result);

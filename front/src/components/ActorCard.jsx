@@ -7,6 +7,7 @@ import {
   CardSubtitle,
   Button,
 } from 'reactstrap';
+import { withRouter } from 'react-router-dom';
 
 class ActorCard extends Component {
   constructor(props) {
@@ -23,10 +24,12 @@ class ActorCard extends Component {
   }
 
   deleteActor(id) {
+    const { history } = this.props;
     const config = {
       method: 'DELETE',
     };
     fetch(`http://localhost:4100/movies-api/movie/${id}`, config);
+    history.push('/actors');
   }
 
   render() {
@@ -35,11 +38,13 @@ class ActorCard extends Component {
       lastname,
       age,
       id,
+      picture,
     } = this.props;
+    console.log(this.props);
     return (
       <div className="ActorCard">
         <Card>
-          <CardImg top width="100%" height="450px" src="" alt="Card image cap" />
+          <CardImg top width="100%" src={picture} alt="Card image cap" />
           <CardBody>
             <CardTitle>{`${name} ${lastname}`}</CardTitle>
             <CardSubtitle>{age}</CardSubtitle>
@@ -52,4 +57,4 @@ class ActorCard extends Component {
   }
 }
 
-export default ActorCard;
+export default withRouter(ActorCard);

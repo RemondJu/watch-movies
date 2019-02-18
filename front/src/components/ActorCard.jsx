@@ -40,7 +40,6 @@ class ActorCard extends Component {
       id,
       picture,
     } = this.props;
-    console.log(this.props);
     return (
       <div className="ActorCard">
         <Card>

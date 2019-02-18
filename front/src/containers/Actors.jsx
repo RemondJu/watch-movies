@@ -18,7 +18,6 @@ class Actors extends Component {
 
   render() {
     const { fetchedActors } = this.props;
-    console.log(fetchedActors);
     return (
       <div className="Actors">
         <h2>Actors</h2>

@@ -88,7 +88,7 @@ class AddSeriesForm extends Component {
     } = this.state;
     return (
       <Form className="AddSeriesForm" onSubmit={this.handleSubmit}>
-        <h2>Add a series</h2>
+        <h2>Add a TV show</h2>
         <FormGroup row>
           <Label for="name" sm={2}>Name</Label>
           <Col sm={10}>

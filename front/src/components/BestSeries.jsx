@@ -12,7 +12,7 @@ class BestSeries extends Component {
     const { series } = this.props;
     return (
       <div className="BestSeries">
-        <h1>Series</h1>
+        <h1>TV shows</h1>
         <div className="moviesDisplay">
           {series[0] ? series.map(movie => (
             <SerieCard

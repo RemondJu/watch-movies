@@ -13,12 +13,9 @@ import {
   DropdownItem,
   Form,
   FormGroup,
-  Label,
   Input,
-  Col,
   Button,
   CustomInput,
-  Row,
 } from 'reactstrap';
 import { NavLink as RouterLink, withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
@@ -70,60 +67,58 @@ class NavBar extends Component {
           <NavbarBrand href="/">watchMovies</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={isOpen} navbar>
-            <Nav className="ml-auto" navbar>
+            <Nav className="mx-auto" navbar>
               <Form onSubmit={this.handleSubmit}>
-                <FormGroup row>
-                  <Label for="searchFilter" sm={2}>Search</Label>
-                  <Col sm={7}>
-                    <Input
-                      type="text"
-                      name="searchFilter"
-                      id="searchFilter"
-                      placeholder="Type something in..."
-                      value={searchFilter}
-                      onChange={this.handleChange}
-                    />
-                    <Row>
-                      <CustomInput
-                        type="radio"
-                        id="moviesRadio"
-                        name="customRadio"
-                        label="Movies"
-                        value="movies"
-                        onChange={this.handleChange}
-                      />
-                      <CustomInput
-                        type="radio"
-                        id="seriesRadio"
-                        name="customRadio"
-                        label="Series"
-                        value="series"
-                        onChange={this.handleChange}
-                      />
-                      <CustomInput
-                        type="radio"
-                        id="actorsRadio"
-                        name="customRadio"
-                        label="Actors"
-                        value="actors"
-                        onChange={this.handleChange}
-                      />
-                    </Row>
-                  </Col>
-                  <Button sm={2} type="submit">Go</Button>
+                <FormGroup row className="flex-nowrap">
+                  <Input
+                    type="text"
+                    name="searchFilter"
+                    id="searchFilter"
+                    placeholder="Search..."
+                    value={searchFilter}
+                    onChange={this.handleChange}
+                  />
+                  <Button type="submit">Go</Button>
+                  <CustomInput
+                    className="mx-1"
+                    type="radio"
+                    id="moviesRadio"
+                    name="customRadio"
+                    label="Movies"
+                    value="movies"
+                    onChange={this.handleChange}
+                  />
+                  <CustomInput
+                    className="mx-1"
+                    type="radio"
+                    id="seriesRadio"
+                    name="customRadio"
+                    label="TV shows"
+                    value="series"
+                    onChange={this.handleChange}
+                  />
+                  <CustomInput
+                    className="ml-1 mr-2"
+                    type="radio"
+                    id="actorsRadio"
+                    name="customRadio"
+                    label="Actors"
+                    value="actors"
+                    onChange={this.handleChange}
+                  />
                 </FormGroup>
               </Form>
-              <NavItem>
+              <NavItem className="px-2">
                 <RouterLink to="/movies/">Movies</RouterLink>
               </NavItem>
-              <NavItem>
+              <NavItem className="px-2">
                 <RouterLink to="/actors/">Actors</RouterLink>
               </NavItem>
-              <NavItem>
-                <RouterLink to="/series/">Series</RouterLink>
+              <NavItem className="px-2">
+                <RouterLink to="/series/">TV shows</RouterLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
+                <DropdownToggle nav caret className="p-0">
                   Actions
                 </DropdownToggle>
                 <DropdownMenu right>
@@ -134,7 +129,7 @@ class NavBar extends Component {
                     <NavLink href="/add-movie/">Add a movie</NavLink>
                   </DropdownItem>
                   <DropdownItem>
-                    <NavLink href="/add-serie/">Add a serie</NavLink>
+                    <NavLink href="/add-serie/">Add a TV show</NavLink>
                   </DropdownItem>
                   <DropdownItem>
                     Add an actor

@@ -97,7 +97,7 @@ router.get('/actors/:name', (req, res) => {
 });
 
 router.get('/big-posters', (req, res) => {
-  connection.query('SELECT name, big_poster FROM movies ORDER BY rating DESC LIMIT 3', (err, result) => {
+  connection.query('SELECT name, big_poster FROM movies WHERE big_poster <> \'\' ORDER BY rating DESC LIMIT 3;', (err, result) => {
     if (err) {
       console.log('Error during series fetching: ', err);
       res.sendStatus(500);

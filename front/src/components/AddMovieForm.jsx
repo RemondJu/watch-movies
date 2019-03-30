@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {
   Col,
   Button,
@@ -8,6 +10,7 @@ import {
   Input,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
+import { fetchMovies } from '../actions/fetch';
 
 class AddMovieForm extends Component {
   constructor(props) {
@@ -64,7 +67,7 @@ class AddMovieForm extends Component {
     };
     fetch('http://localhost:4100/movies-api/movie', config)
       .then(res => res.json())
-      .then(this.setState({
+      .then(() => this.setState({
         name: '',
         director: '',
         category: '',
@@ -74,7 +77,8 @@ class AddMovieForm extends Component {
         releaseDate: '',
         rating: 0,
       }))
-      .then(history.push('/movies'));
+      .then(() => fetchMovies('http://localhost:4100/movies-api/movies'))
+      .then(() => history.push('/movies'));
   }
 
   render() {
@@ -171,4 +175,8 @@ class AddMovieForm extends Component {
   }
 }
 
-export default withRouter(AddMovieForm);
+const mdtp = dispatch => bindActionCreators({
+  fetchMovies,
+}, dispatch);
+
+export default withRouter(connect(null, mdtp)(AddMovieForm));

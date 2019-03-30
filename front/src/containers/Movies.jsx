@@ -14,7 +14,7 @@ class Movies extends Component {
   componentDidMount() {
     const { fetchMoviesAction, movies } = this.props;
     if (!movies[0]) {
-      fetchMoviesAction();
+      fetchMoviesAction('http://localhost:4100/movies-api/movies');
     }
   }
 

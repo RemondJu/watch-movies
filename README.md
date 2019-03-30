@@ -46,6 +46,10 @@ module.exports = connection;
 ```
 replace user and password parts with your own
 
+### Database example
+
+You can import that file in your own database /back/helpers/watch_movies.sql
+
 ## Launch the project
 
 Run in terminal

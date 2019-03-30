@@ -3,7 +3,7 @@ import { fetchHasErrored, fetchIsLoading } from './fetch';
 import fetchedMovies from './fetchedMovies';
 import fetchedSeries from './fetchedSeries';
 import bigPosters from './bigPosters';
-import searchedMovies from './searchedMovies';
+import searchedContent from './searchedContent';
 import singleMovie from './singleMovie';
 import fetchedActors from './fetchedActors';
 
@@ -13,7 +13,7 @@ const allReducers = combineReducers({
   fetchedMovies,
   fetchedSeries,
   bigPosters,
-  searchedMovies,
+  searchedContent,
   singleMovie,
   fetchedActors,
 });

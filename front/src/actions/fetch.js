@@ -88,12 +88,12 @@ export const getBigPosters = url => (dispatch) => {
     .catch(() => dispatch(dataErrored(true)));
 };
 
-export const searchedMoviesFetched = movies => ({
-  type: 'SEARCHED_MOVIES_FETCHED',
-  movies,
+export const searchedContentFetched = content => ({
+  type: 'SEARCHED_CONTENT_FETCHED',
+  content,
 });
 
-export const getSearchedMovies = url => (dispatch) => {
+export const getSearchedContent = url => (dispatch) => {
   dispatch(dataIsLoading(true));
   fetch(url)
     .then((response) => {
@@ -104,7 +104,7 @@ export const getSearchedMovies = url => (dispatch) => {
       return response;
     })
     .then(response => response.json())
-    .then(data => dispatch(searchedMoviesFetched(data)))
+    .then(data => dispatch(searchedContentFetched(data)))
     .catch(() => dispatch(dataErrored(true)));
 };
 

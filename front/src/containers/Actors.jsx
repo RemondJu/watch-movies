@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchActors } from '../actions/fetch';
 import ActorCard from '../components/ActorCard';
+import './Actors.css';
 
 class Actors extends Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class Actors extends Component {
               name={actor.name}
               lastname={actor.lastname}
               age={actor.age}
+              picture={actor.picture}
             />
           )) : ''}
         </div>

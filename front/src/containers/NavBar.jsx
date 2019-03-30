@@ -17,11 +17,13 @@ import {
   Input,
   Col,
   Button,
+  CustomInput,
+  Row,
 } from 'reactstrap';
 import { NavLink as RouterLink, withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getSearchedMovies } from '../actions/fetch';
+import { getSearchedContent } from '../actions/fetch';
 
 class NavBar extends Component {
   constructor(props) {
@@ -29,6 +31,7 @@ class NavBar extends Component {
     this.state = {
       isOpen: false,
       searchFilter: '',
+      customRadio: 'movies',
     };
     this.toggle = this.toggle.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -49,14 +52,14 @@ class NavBar extends Component {
   }
 
   handleSubmit(e) {
-    const { history, getSearchedMoviesAction } = this.props;
-    const { searchFilter } = this.state;
+    const { history, getSearchedContentAction } = this.props;
+    const { searchFilter, customRadio } = this.state;
     e.preventDefault();
-    getSearchedMoviesAction(`http://localhost:4100/movies-api/search/${searchFilter}`);
+    getSearchedContentAction(`http://localhost:4100/movies-api/${customRadio}/${searchFilter}`);
     this.setState({
       searchFilter: '',
     });
-    history.push('/searched-movies');
+    history.push('/searched-content');
   }
 
   render() {
@@ -80,6 +83,32 @@ class NavBar extends Component {
                       value={searchFilter}
                       onChange={this.handleChange}
                     />
+                    <Row>
+                      <CustomInput
+                        type="radio"
+                        id="moviesRadio"
+                        name="customRadio"
+                        label="Movies"
+                        value="movies"
+                        onChange={this.handleChange}
+                      />
+                      <CustomInput
+                        type="radio"
+                        id="seriesRadio"
+                        name="customRadio"
+                        label="Series"
+                        value="series"
+                        onChange={this.handleChange}
+                      />
+                      <CustomInput
+                        type="radio"
+                        id="actorsRadio"
+                        name="customRadio"
+                        label="Actors"
+                        value="actors"
+                        onChange={this.handleChange}
+                      />
+                    </Row>
                   </Col>
                   <Button sm={2} type="submit">Go</Button>
                 </FormGroup>
@@ -121,7 +150,7 @@ class NavBar extends Component {
 }
 
 const mdtp = dispatch => bindActionCreators({
-  getSearchedMoviesAction: getSearchedMovies,
+  getSearchedContentAction: getSearchedContent,
 }, dispatch);
 
 export default withRouter(connect(null, mdtp)(NavBar));

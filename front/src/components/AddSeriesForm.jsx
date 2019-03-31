@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import {
   Col,
   Button,
@@ -8,6 +10,7 @@ import {
   Input,
 } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
+import { fetchSeries } from '../actions/fetch';
 
 class AddSeriesForm extends Component {
   constructor(props) {
@@ -74,6 +77,7 @@ class AddSeriesForm extends Component {
         rating: 0,
         seasons: 0,
       }))
+      .then(() => fetchSeries('http://localhost:4100/movies-api/series'))
       .then(history.push('/series'));
   }
 
@@ -176,4 +180,8 @@ class AddSeriesForm extends Component {
   }
 }
 
-export default withRouter(AddSeriesForm);
+const mdtp = dispatch => bindActionCreators({
+  fetchSeries,
+}, dispatch);
+
+export default withRouter(connect(null, mdtp)(AddSeriesForm));

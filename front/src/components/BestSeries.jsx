@@ -14,7 +14,7 @@ class BestSeries extends Component {
       <div className="BestSeries">
         <h1>TV shows</h1>
         <div className="moviesDisplay">
-          {series[0] ? series.map(movie => (
+          {series[0] ? series.slice(0, 4).map(movie => (
             <SerieCard
               id={movie.id}
               key={movie.id}

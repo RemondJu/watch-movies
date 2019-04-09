@@ -77,18 +77,16 @@ class MainCarousel extends Component {
       },
     ] : [];
 
-    const slides = items.map((item, index) => {
-      return (
-        <CarouselItem
-          onExiting={this.onExiting}
-          onExited={this.onExited}
-          key={index}
-        >
-          <img width="100%" height="600px" src={item.src} alt={`${item.altText} poster`} />
-          <CarouselCaption captionText="" captionHeader={item.caption} />
-        </CarouselItem>
-      );
-    });
+    const slides = items.map(item => (
+      <CarouselItem
+        onExiting={this.onExiting}
+        onExited={this.onExited}
+        key={item.altText}
+      >
+        <img className="test" src={item.src} alt={`${item.altText} poster`} />
+        <CarouselCaption captionText="" captionHeader={item.caption} />
+      </CarouselItem>
+    ));
 
     return (
       <Carousel

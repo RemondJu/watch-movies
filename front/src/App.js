@@ -9,6 +9,7 @@ import AddMovieForm from './components/AddMovieForm';
 import SearchedContent from './components/SearchedContent';
 import ModifyMovieForm from './containers/ModifyMovieForm';
 import AddSeriesForm from './components/AddSeriesForm';
+import AddActorForm from './components/AddActorForm';
 import Series from './containers/Series';
 
 const App = () => (
@@ -21,6 +22,7 @@ const App = () => (
       <Route path="/series" component={Series} />
       <Route path="/add-movie" component={AddMovieForm} />
       <Route path="/add-serie" component={AddSeriesForm} />
+      <Route path="/add-actor" component={AddActorForm} />
       <Route path="/searched-content" component={SearchedContent} />
       <Route path="/modify-movie/:id" component={ModifyMovieForm} />
     </Switch>

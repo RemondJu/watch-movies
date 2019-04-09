@@ -83,7 +83,7 @@ class MainCarousel extends Component {
         onExited={this.onExited}
         key={item.altText}
       >
-        <img className="test" src={item.src} alt={`${item.altText} poster`} />
+        <img className="img-fluid test" src={item.src} alt={`${item.altText} poster`} />
         <CarouselCaption captionText="" captionHeader={item.caption} />
       </CarouselItem>
     ));

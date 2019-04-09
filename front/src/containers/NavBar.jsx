@@ -132,7 +132,7 @@ class NavBar extends Component {
                     <NavLink href="/add-serie/">Add a TV show</NavLink>
                   </DropdownItem>
                   <DropdownItem>
-                    Add an actor
+                    <NavLink href="/add-actor/">Add an actor</NavLink>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>

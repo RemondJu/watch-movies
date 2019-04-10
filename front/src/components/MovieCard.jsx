@@ -12,6 +12,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getOneMovie, fetchMovies } from '../actions/fetch';
 import './MovieCard.css';
+import Confirmation from './Confirmation';
 
 class MovieCard extends Component {
   constructor(props) {
@@ -27,13 +28,11 @@ class MovieCard extends Component {
   }
 
   deleteMovie(id) {
-    const { history } = this.props;
     const config = {
       method: 'DELETE',
     };
     fetch(`http://localhost:4100/movies-api/movie/${id}`, config)
-      .then(() => fetchMovies('http://localhost:4100/movies-api/movies'))
-      .then(() => history.push('/'));
+      .then(() => fetchMovies('http://localhost:4100/movies-api/movies'));
   }
 
   render() {
@@ -58,7 +57,8 @@ class MovieCard extends Component {
             <CardSubtitle>{`Director : ${director}`}</CardSubtitle>
             {seasons ? <CardSubtitle>{`Seasons : ${seasons}`}</CardSubtitle> : ''}
             <CardSubtitle>{`Rating : ${rating}/10`}</CardSubtitle>
-            <Button onClick={() => this.deleteMovie(id)}>Delete</Button>
+            {/* <Button onClick={() => this.toggleConfirmationModal(id)}>Delete</Button> */}
+            <Confirmation confirmedAction={this.deleteMovie} buttonLabel="Delete" id={id} />
             <Button type="button" onClick={() => this.getMovieToUpdate(id)}>Update</Button>
           </CardBody>
         </Card>

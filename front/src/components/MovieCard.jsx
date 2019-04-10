@@ -27,14 +27,6 @@ class MovieCard extends Component {
     history.push(`/modify-movie/${id}`);
   }
 
-  deleteMovie(id) {
-    const config = {
-      method: 'DELETE',
-    };
-    fetch(`http://localhost:4100/movies-api/movie/${id}`, config)
-      .then(() => fetchMovies('http://localhost:4100/movies-api/movies'));
-  }
-
   render() {
     const {
       name,
@@ -58,7 +50,7 @@ class MovieCard extends Component {
             {seasons ? <CardSubtitle>{`Seasons : ${seasons}`}</CardSubtitle> : ''}
             <CardSubtitle>{`Rating : ${rating}/10`}</CardSubtitle>
             {/* <Button onClick={() => this.toggleConfirmationModal(id)}>Delete</Button> */}
-            <Confirmation confirmedAction={this.deleteMovie} buttonLabel="Delete" id={id} />
+            <Confirmation confirmedAction={this.deleteMovie} buttonLabel="Delete" id={id} item="movie" />
             <Button type="button" onClick={() => this.getMovieToUpdate(id)}>Update</Button>
           </CardBody>
         </Card>

@@ -10,7 +10,7 @@ import {
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getOneMovie } from '../actions/fetch';
+import { getOneMovie, fetchMovies } from '../actions/fetch';
 import './MovieCard.css';
 
 class MovieCard extends Component {
@@ -32,7 +32,8 @@ class MovieCard extends Component {
       method: 'DELETE',
     };
     fetch(`http://localhost:4100/movies-api/movie/${id}`, config)
-      .then(history.push('/'));
+      .then(() => fetchMovies('http://localhost:4100/movies-api/movies'))
+      .then(() => history.push('/'));
   }
 
   render() {
@@ -68,6 +69,7 @@ class MovieCard extends Component {
 
 const mdtp = dispatch => bindActionCreators({
   getOneMovieAction: getOneMovie,
+  fetchMovies,
 }, dispatch);
 
 export default withRouter(connect(null, mdtp)(MovieCard));

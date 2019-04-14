@@ -37,11 +37,12 @@ class MovieCard extends Component {
       poster,
       seasons,
       id,
+      history,
     } = this.props;
     return (
       <div className="MovieCard">
         <Card>
-          <CardImg top width="100%" height="450px" src={poster} alt="Card image cap" />
+          <CardImg top width="100%" height="450px" src={poster} alt="Card image cap" onClick={() => history.push(`/movie/${id}`)} />
           <CardBody>
             <CardTitle>{name}</CardTitle>
             <CardSubtitle>{`released : ${date.slice(0, 10)}`}</CardSubtitle>
@@ -49,7 +50,6 @@ class MovieCard extends Component {
             <CardSubtitle>{`Director : ${director}`}</CardSubtitle>
             {seasons ? <CardSubtitle>{`Seasons : ${seasons}`}</CardSubtitle> : ''}
             <CardSubtitle>{`Rating : ${rating}/10`}</CardSubtitle>
-            {/* <Button onClick={() => this.toggleConfirmationModal(id)}>Delete</Button> */}
             <Confirmation confirmedAction={this.deleteMovie} buttonLabel="Delete" id={id} item="movie" />
             <Button type="button" onClick={() => this.getMovieToUpdate(id)}>Update</Button>
           </CardBody>

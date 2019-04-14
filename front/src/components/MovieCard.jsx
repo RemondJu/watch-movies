@@ -18,13 +18,13 @@ class MovieCard extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.getMovieToUpdate = this.getMovieToUpdate.bind(this);
+    this.goToMovie = this.goToMovie.bind(this);
   }
 
-  getMovieToUpdate() {
+  goToMovie(path) {
     const { history, id, getOneMovieAction } = this.props;
     getOneMovieAction(`http://localhost:4100/movies-api/movie/${id}`);
-    history.push(`/modify-movie/${id}`);
+    history.push(`/${path || ''}movie/${id}`);
   }
 
   render() {
@@ -37,12 +37,11 @@ class MovieCard extends Component {
       poster,
       seasons,
       id,
-      history,
     } = this.props;
     return (
       <div className="MovieCard">
         <Card>
-          <CardImg top width="100%" height="450px" src={poster} alt="Card image cap" onClick={() => history.push(`/movie/${id}`)} />
+          <CardImg top width="100%" height="450px" src={poster} alt="Card image cap" onClick={() => this.goToMovie()} />
           <CardBody>
             <CardTitle>{name}</CardTitle>
             <CardSubtitle>{`released : ${date.slice(0, 10)}`}</CardSubtitle>
@@ -51,7 +50,7 @@ class MovieCard extends Component {
             {seasons ? <CardSubtitle>{`Seasons : ${seasons}`}</CardSubtitle> : ''}
             <CardSubtitle>{`Rating : ${rating}/10`}</CardSubtitle>
             <Confirmation confirmedAction={this.deleteMovie} buttonLabel="Delete" id={id} item="movie" />
-            <Button type="button" onClick={() => this.getMovieToUpdate(id)}>Update</Button>
+            <Button type="button" onClick={() => this.goToMovie('modify-')}>Update</Button>
           </CardBody>
         </Card>
       </div>

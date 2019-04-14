@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getOneMovie } from '../actions/fetch';
-import { withRouter } from 'react-router-dom';
 
 const MovieDetails = (props) => {
-  const { id } = props;
+  const { match, movie } = props;
 
   useEffect(() => {
-    console.log('test', props.match.params.id);
-    getOneMovie(`http://localhost:4100/movies-api/movie/${props.match.params.id}`);
+    if (!movie.name) {
+      props.getOneMovie(`http://localhost:4100/movies-api/movie/${match.params.id}`);
+    }
   });
 
 
   return (
     <div className="MovieDetails">
-      <h1>{`Details of the movie #${props.match.params.id}` || 'Loading...'}</h1>
+      <h1>{`Movie details : ${movie.name || 'loading'}`}</h1>
     </div>
   );
 };
